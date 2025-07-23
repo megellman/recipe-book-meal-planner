@@ -1,80 +1,72 @@
-🚀 Project: CLI Recipe Book & Meal Planner
+# 🚀 Project: CLI Pet Adoption Center Manager
 
-### 📌 User Story
-AS A home cook  
-I WANT to save and view recipes and create meal plans for the week  
-SO THAT I can organize my cooking and grocery shopping efficiently
+## 📌 User Story
+AS AN animal shelter manager  
+I WANT to track animals available for adoption with their details  
+SO THAT I can easily manage shelter records and share pet profiles with potential adopters
 
-### ✅ Acceptance Criteria
+## ✅ Acceptance Criteria
 GIVEN a command-line application that accepts user input  
 WHEN I start the application  
-THEN I am prompted to enter a recipe name, ingredients, and cooking instructions  
-WHEN I finish adding a recipe  
-THEN I am presented with a menu to add another recipe, view saved recipes, create a meal plan, or exit  
-WHEN I choose to view saved recipes  
-THEN I see a list of all recipe names and can select one to view its details  
-WHEN I choose to create a meal plan  
-THEN I am prompted to select recipes for each day of the week  
-WHEN I finish planning meals  
-THEN an HTML file is generated showing the weekly meal plan with recipe names and links to their full details  
-WHEN I click on a recipe name in the HTML meal plan  
-THEN I see the recipe's ingredients and instructions
+THEN I am prompted to enter a new animal's details (species, name, age, breed, and special notes)  
+WHEN I finish adding an animal  
+THEN I am presented with a menu to add another animal, view available animals, generate an adoption webpage, or exit  
+WHEN I choose to view available animals  
+THEN I see a list of all animals with their name and species, and can select one to view full details  
+WHEN I choose to generate an adoption webpage  
+THEN an HTML file is generated that displays profiles for each animal with their photo (placeholder image URL), details, and a contact button  
+WHEN I click on the contact button  
+THEN my default email program opens with the subject “Adoption Inquiry: [Animal Name]”
 
-### 📝 Requirements & Key Skills Tested
-✅ Object-Oriented Programming:  
-Implement Recipe, MealPlan, and optionally a GroceryList class
-
-✅ Class inheritance and constructors:  
-Recipe is a base class with name, ingredients, instructions  
-MealPlan stores recipes for each day  
-Could extend classes if adding categories of recipes (e.g. BreakfastRecipe, DinnerRecipe)
+## 📝 Requirements & Key Skills Tested
+✅ Object-Oriented Programming & Class Inheritance:
+- `Animal` base class with properties: name, age, species, breed, notes
+- Subclasses:
+  - `Dog` (extra: training status)
+  - `Cat` (extra: indoor/outdoor status)
+  - `OtherPet` (for birds, reptiles, etc.)
 
 ✅ CLI with Inquirer to gather user inputs  
-✅ File I/O to save recipes to JSON and read them later  
-✅ HTML generation to output the meal plan in a readable webpage (similar to team profile HTML output)  
+✅ HTML Generation to output adoption profiles  
+✅ File I/O to save animal records to JSON  
 ✅ Testing with Jest for each class and utility function  
-✅ Git, clean folder structure, .gitignore, README with usage instructions
+✅ Git best practices, clean folder structure, `.gitignore`, and README with instructions
 
-### 🔧 Suggested Directory Structure
+## 🔧 Suggested Directory Structure
 .
-├── __tests__/             // Jest tests  
-│   ├── Recipe.test.js  
-│   ├── MealPlan.test.js  
-│   └── (optional) GroceryList.test.js  
-├── data/                  // stores recipes as JSON files  
-├── dist/                  // generated HTML meal plan  
-├── lib/                   // classes: Recipe.js, MealPlan.js  
-├── src/                   // template helper code for generating HTML  
+├── __tests__/  
+│   ├── Animal.test.js  
+│   ├── Dog.test.js  
+│   ├── Cat.test.js  
+│   └── OtherPet.test.js  
+├── data/                  // stores animals.json  
+├── dist/                  // generated adoption.html  
+├── lib/                   // classes: Animal.js, Dog.js, Cat.js, OtherPet.js  
+├── src/                   // HTML template helper  
 ├── .gitignore  
-├── index.js               // runs the application  
-└── package.json           
+├── index.js  
+└── package.json
 
-### 💻 Example Class Design
+## 💻 Example Class Design
 
-**Recipe.js**  
+**Animal.js**
 ```js
-class Recipe {
-  constructor(name, ingredients, instructions) {
+class Animal {
+  constructor(name, age, species, breed, notes) {
     this.name = name;
-    this.ingredients = ingredients; // array of strings
-    this.instructions = instructions;
+    this.age = age;
+    this.species = species;
+    this.breed = breed;
+    this.notes = notes;
   }
 
-  getName() {
-    return this.name;
+  getProfile() {
+    return `${this.name} (${this.species}) - Age: ${this.age}, Breed: ${this.breed}`;
   }
 
-  getIngredients() {
-    return this.ingredients;
-  }
-
-  getInstructions() {
-    return this.instructions;
-  }
-
-  getSummary() {
-    return `${this.name}: ${this.ingredients.length} ingredients`;
+  getRole() {
+    return 'Animal';
   }
 }
 
-module.exports = Recipe;
+module.exports = Animal;
